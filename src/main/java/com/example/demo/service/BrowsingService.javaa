@@ -1,0 +1,26 @@
+package com.example.demo.service;
+
+import com.example.demo.model.Book;
+import com.example.demo.model.Page;
+import com.example.demo.model.Publisher;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public interface BrowsingService {
+
+    List<Publisher> getPublishers();
+
+    Page<Publisher> getPublishersPage(int pageNumber, int pageSize);
+
+    public Publisher getPublisher(Long id);
+
+    List<Book> getBooksForPublisher(Long pId);
+
+    Book getBookById(Long bId);
+
+    Publisher addPublisher(Publisher p);
+
+    Book addBook(Publisher p, Book bm);
+}
