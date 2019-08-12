@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0.17
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'inz_database'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'Holuczkow12!'
+      MYSQL_ROOT_PASSWORD: 'Holuczkow12!'
+    volumes:
+      - type: bind
+        source: "./resources/db/"
+        target: "/docker-entrypoint-initdb.d"
+        read_only: true
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
