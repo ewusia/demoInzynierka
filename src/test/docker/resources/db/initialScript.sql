@@ -1,4 +1,4 @@
-CREATE TABLE role (
+/*CREATE TABLE role (
                       id bigint(20) NOT NULL,
                       name varchar(255) DEFAULT NULL,
                       PRIMARY KEY (id)
@@ -22,4 +22,4 @@ CREATE TABLE users_roles (
                              KEY FKgd3iendaoyh04b95ykqise6qh (user_id),
                              CONSTRAINT FKgd3iendaoyh04b95ykqise6qh FOREIGN KEY (user_id) REFERENCES user (id),
                              CONSTRAINT FKt4v0rrweyk393bdgt107vdx0x FOREIGN KEY (role_id) REFERENCES role (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;*/
