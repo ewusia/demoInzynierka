@@ -28,13 +28,21 @@
             <th>Action</th>
         </tr>
             </thead>
-            <tr>
-                <td>${book.id}</td>
-                <td>${book.title}</td>
-                <td>${book.year}</td>
-                <td>${book.author}</td>
-                <td>${book.category}</td>
-            </tr>
+
+            <div class="list-group" th:each="book : ${userName}">
+                <a href="#" class="list-group-item list-group-item-action active">
+                    <p th:text="${book}">
+                </a>
+                <tr>
+                    <td>${book.id}</td>
+                    <td>${book.title}</td>
+                    <td>${book.year}</td>
+                    <td>${book.author}</td>
+                    <td>${book.category}</td>
+                </tr>
+            </div>
+
+
         </table>
 
     </form>
