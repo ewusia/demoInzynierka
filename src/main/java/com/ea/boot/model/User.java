@@ -1,3 +1,4 @@
+/*
 package com.gpch.login.model;
 
 import lombok.AllArgsConstructor;
@@ -44,3 +45,4 @@ public class User {
     private Set<Role> roles;
 
 }
+*/

@@ -1,9 +1,10 @@
+/*
 package com.gpch.login.service;
 
 import com.gpch.login.model.Role;
 import com.gpch.login.model.User;
-import com.gpch.login.repository.RoleRepository;
-import com.gpch.login.repository.UserRepository;
+import com.gpch.login.repo.RoleRepository;
+import com.gpch.login.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,4 +41,4 @@ public class UserService {
         return userRepository.save(user);
     }
 
-}
+}*/

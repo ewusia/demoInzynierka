@@ -1,3 +1,4 @@
+/*
 package com.gpch.login.configuration;
 
 import org.springframework.context.annotation.Bean;
@@ -14,4 +15,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bCryptPasswordEncoder;
     }
 
-}
+}*/

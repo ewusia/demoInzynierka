@@ -1,3 +1,4 @@
+/*
 package com.gpch.login.model;
 
 import lombok.AllArgsConstructor;
@@ -12,12 +13,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "author")
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
+    @Column(name = "author_id")
     private int id;
-    @Column(name = "role")
-    private String role;
+    @Column(name = "author")
+    private String author;
 }
+*/

@@ -1,4 +1,4 @@
-package com.mykong.form.exception;
+package com.ea.boot.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
