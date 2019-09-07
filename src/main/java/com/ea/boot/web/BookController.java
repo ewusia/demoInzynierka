@@ -6,7 +6,9 @@ import com.ea.boot.web.exception.BookIdMismatchException;
 import com.ea.boot.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -20,6 +22,14 @@ public class BookController {
     @GetMapping
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView bookListPage() {
+        ModelAndView mav = new ModelAndView("list");
+        List<Book> bookList = (List<Book>) bookRepository.findAll();
+        mav.addObject("bookList", bookList);
+        return mav;
     }
 
     @GetMapping("/title/{bookTitle}")

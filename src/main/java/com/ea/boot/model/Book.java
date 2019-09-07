@@ -15,6 +15,15 @@ public class Book {
     @Column(nullable = false)
     private String author;
 
+    @Column(nullable = false)
+    private String year;
+
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private String cover;
+
     public Book() {
         super();
     }
@@ -23,6 +32,14 @@ public class Book {
         super();
         this.title = title;
         this.author = author;
+    }
+
+    public Book(String title, String author, String year, String category, String cover) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.category = category;
+        this.cover = cover;
     }
 
     public long getId() {
@@ -47,6 +64,30 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     @Override
@@ -85,7 +126,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", category=" + category + ", cover=" + cover + "]";
     }
 
 }
