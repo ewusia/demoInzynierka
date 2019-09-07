@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Books </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th> Title </th>
+                    <th> Author </th>
+                    <th> Year </th>
+                    <th> Category </th>
+                    <th> Cover </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${bookList == null}">
+                    <td colspan="2"> No Books Available </td>
+                </tr>
+                <tr th:each="book : ${bookList}">
+                    <td><span th:text="${book.title}"> Title </span></td>
+                    <td><span th:text="${book.author}"> Title </span></td>
+                    <td><span th:text="${book.year}"> Year </span></td>
+                    <td><span th:text="${book.category}"> Category </span></td>
+                    <td><span th:text="${book.cover}"> Cover </span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-success" href="#" th:href="@{/books/create}"> Add Books </a>
+<!--
+            <a class="btn btn-primary" href="#" th:href="@{/books/edit}" th:classappend="${bookList == null} ? 'disabled' : ''"> Edit Books </a>
+-->
+        </div>
+    </div>
+</div>
+</body>
+</html>

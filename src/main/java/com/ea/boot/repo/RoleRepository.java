@@ -1,4 +1,5 @@
-package com.gpch.login.repository;
+/*
+package com.gpch.login.repo;
 
 import com.gpch.login.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,3 +10,4 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     Role findByRole(String role);
 
 }
+*/
