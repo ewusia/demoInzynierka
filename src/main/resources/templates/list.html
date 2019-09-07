@@ -33,6 +33,11 @@
                     <td><span th:text="${book.category}"> Category </span></td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
                 </tr>
+                <tr>
+                    <select th:field="*{selectedAuthor}">
+                        <option th:each="operator : ${authors}" th:value="${operator}" th:text="${operator}"></option>
+                    </select>
+                </tr>
                 </tbody>
             </table>
         </div>

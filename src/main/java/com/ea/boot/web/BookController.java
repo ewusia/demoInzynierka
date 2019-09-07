@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,7 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+
 
     @GetMapping
     public Iterable<Book> findAll() {
@@ -29,6 +31,14 @@ public class BookController {
         ModelAndView mav = new ModelAndView("list");
         List<Book> bookList = (List<Book>) bookRepository.findAll();
         mav.addObject("bookList", bookList);
+
+        ArrayList<String> authors = new ArrayList<>();
+        authors.add("adam");
+        authors.add("ewa");
+
+
+        mav.addObject("authors",authors);
+        mav.addObject("selectedAuthor", "");
         return mav;
     }
 
