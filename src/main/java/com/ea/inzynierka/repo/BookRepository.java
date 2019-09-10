@@ -1,6 +1,6 @@
-package com.ea.boot.repo;
+package com.ea.inzynierka.repo;
 
-import com.ea.boot.model.Book;
+import com.ea.inzynierka.model.Book;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 

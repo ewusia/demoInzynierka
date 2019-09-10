@@ -1,4 +1,4 @@
-package com.ea.boot.exception;
+package com.ea.inzynierka.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

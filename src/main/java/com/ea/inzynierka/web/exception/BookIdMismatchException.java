@@ -1,4 +1,4 @@
-package com.ea.boot.web.exception;
+package com.ea.inzynierka.web.exception;
 
 public class BookIdMismatchException extends RuntimeException {
 

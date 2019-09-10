@@ -1,7 +1,7 @@
-package com.ea.boot.web;
+package com.ea.inzynierka.web;
 
-import com.ea.boot.web.exception.BookIdMismatchException;
-import com.ea.boot.web.exception.BookNotFoundException;
+import com.ea.inzynierka.web.exception.BookIdMismatchException;
+import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
