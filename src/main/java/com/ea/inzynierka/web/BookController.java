@@ -1,19 +1,18 @@
-package com.ea.boot.web;
+package com.ea.inzynierka.web;
 
-import com.ea.boot.repo.BookRepository;
-import com.ea.boot.model.Book;
-import com.ea.boot.web.exception.BookIdMismatchException;
-import com.ea.boot.web.exception.BookNotFoundException;
+import com.ea.inzynierka.repo.BookRepository;
+import com.ea.inzynierka.model.Book;
+import com.ea.inzynierka.web.exception.BookIdMismatchException;
+import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/books")
 public class BookController {
 
     @Autowired

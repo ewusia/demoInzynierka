@@ -1,4 +1,4 @@
-package com.ea.boot.model;
+package com.ea.inzynierka.model;
 
 import javax.persistence.*;
 
