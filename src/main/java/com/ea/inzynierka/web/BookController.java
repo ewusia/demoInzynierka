@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +21,7 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+
 
     @GetMapping
     public Iterable<Book> findAll() {
@@ -31,6 +33,14 @@ public class BookController {
         ModelAndView mav = new ModelAndView("list");
         List<Book> bookList = (List<Book>) bookRepository.findAll();
         mav.addObject("bookList", bookList);
+
+        ArrayList<String> authors = new ArrayList<>();
+        authors.add("adam");
+        authors.add("ewa");
+
+
+        mav.addObject("authors",authors);
+        mav.addObject("selectedAuthor", "");
         return mav;
     }
 

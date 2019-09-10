@@ -4,10 +4,10 @@ services:
     image: mysql:8.0.17
     restart: always
     environment:
-      MYSQL_DATABASE: 'inz_database'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'Holuczkow12!'
-      MYSQL_ROOT_PASSWORD: 'Holuczkow12!'
+      MYSQL_DATABASE: 'new'
+      MYSQL_USER: 'ewa'
+      MYSQL_PASSWORD: 'Staszica4m61!'
+      MYSQL_ROOT_PASSWORD: 'Staszica4m61!'
     volumes:
       - type: bind
         source: "./resources/db/"
