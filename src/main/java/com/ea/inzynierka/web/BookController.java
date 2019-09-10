@@ -6,9 +6,12 @@ import com.ea.inzynierka.web.exception.BookIdMismatchException;
 import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,40 @@ public class BookController {
         mav.addObject("bookList", bookList);
         return mav;
     }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView newBookPage() {
+        ModelAndView mav = new ModelAndView("addBooksForm", "book", new Book());
+        return mav;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView createNewBook(@ModelAttribute @Valid Book book,
+                                      BindingResult result,
+                                      final RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors())
+            return new ModelAndView("addBooksForm");
+
+        ModelAndView mav = new ModelAndView();
+        String message = "New book " + book.getTitle() + " was successfully created.";
+
+        //bookRepository.create(book);
+        mav.setViewName("redirect:/index.html");
+
+        redirectAttributes.addFlashAttribute("message", message);
+        return mav;
+    }
+
+/*    @RequestMapping(value = "/addition", method = RequestMethod.POST)
+    public ModelAndView createNewUser(@Valid Book book, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        bookRepository.saveOrUpdate(book);
+        modelAndView.addObject("successMessage", "Book has been added successfully");
+        modelAndView.addObject("book", new Book());
+        modelAndView.setViewName("addition");
+        return modelAndView;
+    }*/
 
     @GetMapping("/title/{bookTitle}")
     public List<Book> findByTitle(@PathVariable String bookTitle) {
