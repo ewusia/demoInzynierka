@@ -2,6 +2,7 @@ package com.ea.inzynierka.web;
 
 import com.ea.inzynierka.repo.BookRepository;
 import com.ea.inzynierka.model.Book;
+import com.ea.inzynierka.service.BookService;
 import com.ea.inzynierka.web.exception.BookIdMismatchException;
 import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private BookService bookService;
 
 
     @GetMapping
@@ -61,8 +65,8 @@ public class BookController {
         ModelAndView mav = new ModelAndView();
         String message = "New book " + book.getTitle() + " was successfully created.";
 
-        //bookRepository.create(book);
-        mav.setViewName("redirect:/index.html");
+        bookService.create(book);
+        mav.setViewName("index");
 
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
@@ -89,12 +93,12 @@ public class BookController {
                 .orElseThrow(BookNotFoundException::new);
     }
 
-    @PostMapping
+/*    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Book create(@RequestBody Book book) {
         Book book1 = bookRepository.save(book);
         return book1;
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
