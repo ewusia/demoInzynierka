@@ -55,8 +55,8 @@
                     <div class="col-sm-9">
                         <select th:field="*{cover}">
                             <option value="" th:disabled="disabled" th:selected="selected"> -- Select the cover type -- </option>
-                            <option th:value="'S'" th:text="soft-cover"></option>
-                            <option th:value="'H'" th:text="hard-cover"></option>
+                            <option th:value="'soft-cover'" th:text="soft-cover"></option>
+                            <option th:value="'hard-cover'" th:text="hard-cover"></option>
                         </select>
                     </div>
                 </div>
@@ -66,9 +66,6 @@
                         <button type="submit" class="btn btn-primary btn-block">Add book</button>
                     </div>
                 </div>
-
-                <h2><span class="text-success" th:utext="${message}"></span></h2>
-
             </form>
         </div>
     </div>

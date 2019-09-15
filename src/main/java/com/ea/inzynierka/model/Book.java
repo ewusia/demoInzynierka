@@ -1,6 +1,7 @@
 package com.ea.inzynierka.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Book {
@@ -9,19 +10,24 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Title field cannot be empty")
     private String title;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    @NotBlank(message = "Author field cannot be empty")
     private String author;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    @NotBlank(message = "Year field cannot be empty")
     private String year;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    @NotBlank(message = "Category field cannot be empty")
     private String category;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    @NotBlank(message = "Cover field cannot be empty")
     private String cover;
 
     public Book() {
