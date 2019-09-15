@@ -1,7 +1,9 @@
 package com.ea.inzynierka.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Book {
@@ -11,23 +13,25 @@ public class Book {
     private long id;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "Title field cannot be empty")
+    @NotBlank(message = "title field cannot be empty")
     private String title;
 
     @Column(nullable = false)
-    @NotBlank(message = "Author field cannot be empty")
+    @NotBlank(message = "author field cannot be empty")
     private String author;
 
     @Column(nullable = false)
-    @NotBlank(message = "Year field cannot be empty")
+    @NotBlank(message = "year field cannot be empty")
+    @Pattern(regexp = "^\\d{4}$", message = "required format 'YYYY'")
+    @Min(1901)
     private String year;
 
     @Column(nullable = false)
-    @NotBlank(message = "Category field cannot be empty")
+    @NotBlank(message = "category field cannot be empty")
     private String category;
 
     @Column(nullable = false)
-    @NotBlank(message = "Cover field cannot be empty")
+    @NotBlank(message = "cover field cannot be empty")
     private String cover;
 
     public Book() {

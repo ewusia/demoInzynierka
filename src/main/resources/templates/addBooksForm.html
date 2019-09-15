@@ -44,23 +44,22 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{category}"
-                               placeholder="Category" class="form-control"/> <label
-                            th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
-                            class="validation-message"></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <select th:field="*{cover}">
-                            <option value="" th:disabled="disabled" th:selected="selected"> -- Select the cover type -- </option>
-                            <option th:value="'soft-cover'" th:text="soft-cover"></option>
-                            <option th:value="'hard-cover'" th:text="hard-cover"></option>
+                        <select th:field="*{category}">
+                            <option value="" th:disabled="disabled" th:selected="selected"> &#45;&#45; Select the category &#45;&#45; </option>
+                            <option th:value="'IT'" th:text="IT"></option>
+                            <option th:value="'Health'" th:text="Health"></option>
+                            <option th:value="'Beauty'" th:text="Beauty"></option>
+                            <option th:value="'History'" th:text="History"></option>
+                            <option th:value="'Fantastic'" th:text="Fantastic"></option>
                         </select>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <tr>
+                        <input type="radio" name="cover" value="soft-cover" checked="checked"> soft-cover<br>
+                        <input type="radio" name="cover" value="hard-cover"> hard-cover<br>
+                    </tr>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-9">
                         <button type="submit" class="btn btn-primary btn-block">Add book</button>

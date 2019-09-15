@@ -35,11 +35,6 @@
                     <td><span th:text="${book.cover}"> Cover </span></td>
                     <td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i>Delete</a></td>
                 </tr>
-                <tr>
-                    <select th:field="*{selectedAuthor}">
-                        <option th:each="operator : ${authors}" th:value="${operator}" th:text="${operator}"></option>
-                    </select>
-                </tr>
                 </tbody>
             </table>
         </div>

@@ -43,14 +43,6 @@ public class BookController {
         ModelAndView mav = new ModelAndView("list");
         List<Book> bookList = (List<Book>) bookRepository.findAll();
         mav.addObject("bookList", bookList);
-
-        ArrayList<String> authors = new ArrayList<>();
-        authors.add("adam");
-        authors.add("ewa");
-
-
-        mav.addObject("authors",authors);
-        mav.addObject("selectedAuthor", "");
         return mav;
     }
 
