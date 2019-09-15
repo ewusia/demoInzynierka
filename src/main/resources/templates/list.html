@@ -15,7 +15,6 @@
             <table class="table" >
                 <thead>
                 <tr>
-                    <th> Id </th>
                     <th> Title </th>
                     <th> Author </th>
                     <th> Year </th>
@@ -29,7 +28,6 @@
                     <td colspan="2"> No Books Available </td>
                 </tr>
                 <tr th:each="book : ${bookList}">
-                    <td ><span th:text="${book.id}"> Title </span></td>
                     <td><span th:text="${book.title}"> Title </span></td>
                     <td><span th:text="${book.author}"> Title </span></td>
                     <td><span th:text="${book.year}"> Year </span></td>

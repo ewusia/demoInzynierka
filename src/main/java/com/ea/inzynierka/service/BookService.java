@@ -8,8 +8,4 @@ public interface BookService {
 	
 	public Book create(Book shop);
 	public Book delete(int id) throws BookNotFound;
-	public List<Book> findAll();
-	public Book update(Book book) throws BookNotFound;
-	public Book findById(int id);
-
 }

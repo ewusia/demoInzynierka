@@ -19,7 +19,8 @@ public class BookServiceImpl implements BookService {
 	@Transactional
 	public Book create(Book book) {
 		Book createdBook = book;
-		return bookRepository.save(createdBook);
+		bookRepository.save(createdBook);
+		return createdBook;
 	}
 
 	@Override
@@ -32,29 +33,6 @@ public class BookServiceImpl implements BookService {
 
 		bookRepository.delete(deletedBook);
 		return deletedBook;
-	}
-
-	@Override
-	@Transactional(rollbackFor= BookNotFound.class)
-	public Book update(Book book) throws BookNotFound {
-		Book updatedBook = bookRepository.findById(book.getId());
-
-		if (updatedBook == null)
-			throw new BookNotFound();
-
-		updatedBook.setTitle(book.getTitle());
-		updatedBook.setAuthor(book.getAuthor());
-		return updatedBook;
-	}
-
-	@Override
-	public List<Book> findAll() {
-		return null;
-	}
-
-	@Override
-	public Book findById(int id) {
-		return null;
 	}
 
 }

@@ -6,22 +6,22 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String author;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String year;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String category;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String cover;
 
     public Book() {

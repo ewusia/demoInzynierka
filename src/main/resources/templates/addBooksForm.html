@@ -53,14 +53,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-<!--                        <input type="text" th:field="*{cover}"
-                               placeholder="Cover" class="form-control"/> <label
-                            th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"
-                            class="validation-message"></label>-->
                         <select th:field="*{cover}">
-                            <!--<option value="" th:disabled="disabled" th:selected="selected">
-                                &#45;&#45; Select the cover type &#45;&#45;
-                            </option>-->
                             <option value="" th:disabled="disabled" th:selected="selected"> -- Select the cover type -- </option>
                             <option th:value="'S'" th:text="soft-cover"></option>
                             <option th:value="'H'" th:text="hard-cover"></option>
@@ -74,9 +67,7 @@
                     </div>
                 </div>
 
-<!--
-                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
--->
+                <h2><span class="text-success" th:utext="${message}"></span></h2>
 
             </form>
         </div>

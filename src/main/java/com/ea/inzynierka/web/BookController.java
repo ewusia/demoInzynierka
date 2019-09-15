@@ -67,7 +67,6 @@ public class BookController {
 
         if (result.hasErrors())
             return new ModelAndView("addBooksForm");
-
         ModelAndView mav = new ModelAndView();
         mav.addObject("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
         bookService.create(book);
