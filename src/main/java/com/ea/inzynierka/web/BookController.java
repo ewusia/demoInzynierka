@@ -63,24 +63,13 @@ public class BookController {
             return new ModelAndView("addBooksForm");
 
         ModelAndView mav = new ModelAndView();
-        String message = "New book " + book.getTitle() + " was successfully created.";
+        mav.addObject("successMessage", "Book '" + book.getTitle() + "' has been added successfully");
 
         bookService.create(book);
         mav.setViewName("info");
 
-        redirectAttributes.addFlashAttribute("message", message);
         return mav;
     }
-
-/*    @RequestMapping(value = "/addition", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid Book book, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        bookRepository.saveOrUpdate(book);
-        modelAndView.addObject("successMessage", "Book has been added successfully");
-        modelAndView.addObject("book", new Book());
-        modelAndView.setViewName("addition");
-        return modelAndView;
-    }*/
 
     @GetMapping("/title/{bookTitle}")
     public List<Book> findByTitle(@PathVariable String bookTitle) {
