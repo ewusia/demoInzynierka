@@ -66,7 +66,7 @@ public class BookController {
         String message = "New book " + book.getTitle() + " was successfully created.";
 
         bookService.create(book);
-        mav.setViewName("index");
+        mav.setViewName("info");
 
         redirectAttributes.addFlashAttribute("message", message);
         return mav;
