@@ -1,5 +1,6 @@
 package com.ea.inzynierka.web;
 
+import com.ea.inzynierka.exception.BookNotFound;
 import com.ea.inzynierka.repo.BookRepository;
 import com.ea.inzynierka.model.Book;
 import com.ea.inzynierka.service.BookService;
@@ -27,10 +28,15 @@ public class BookController {
     private BookService bookService;
 
 
-    @GetMapping
+/*    @GetMapping
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
     }
+
+    @GetMapping("/title/{bookTitle}")
+    public List<Book> findByTitle(@PathVariable String bookTitle) {
+        return bookRepository.findByTitle(bookTitle);
+    }*/
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView bookListPage() {
@@ -63,46 +69,20 @@ public class BookController {
             return new ModelAndView("addBooksForm");
 
         ModelAndView mav = new ModelAndView();
-        mav.addObject("successMessage", "Book '" + book.getTitle() + "' has been added successfully");
-
+        mav.addObject("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
         bookService.create(book);
         mav.setViewName("info");
-
         return mav;
     }
 
-    @GetMapping("/title/{bookTitle}")
-    public List<Book> findByTitle(@PathVariable String bookTitle) {
-        return bookRepository.findByTitle(bookTitle);
-    }
+    @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+    public ModelAndView deleteBook(@PathVariable Integer id,
+                                   final RedirectAttributes redirectAttributes) throws BookNotFound {
 
-    @GetMapping("/{id}")
-    public Book findOne(@PathVariable long id) {
-        return bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-    }
-
-/*    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
-        Book book1 = bookRepository.save(book);
-        return book1;
-    }*/
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        bookRepository.deleteById(id);
-    }
-
-    @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable long id) {
-        if (book.getId() != id) {
-            throw new BookIdMismatchException();
-        }
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        return bookRepository.save(book);
+        ModelAndView mav = new ModelAndView();
+        Book book = bookService.delete(id);
+        mav.setViewName("info");
+        mav.addObject("successMessage", "Book '" + book.getTitle() + "' was successfully deleted.");
+        return mav;
     }
 }

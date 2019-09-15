@@ -1,0 +1,88 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<form th:action="@{/books/list}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Books List</button>
+</form>
+<p>Tu będzie edycja</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="#" th:action="@{/edit/{id}(id=${book.id})}" th:object="${book}" method="post">
+                  th:object="${book}" method="post" class="form-horizontal"
+                  role="form">
+                <h2>Add book</h2>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                               class="validation-message"></label>
+                        <input type="text" th:field="*{title}" placeholder="Title"
+                               class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{author}" placeholder="Author"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{year}" placeholder="Year"
+                               class="form-control"/> <label
+                            th:if="${#fields.hasErrors('year')}" th:errors="*{year}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{category}"
+                               placeholder="Category" class="form-control"/> <label
+                            th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                            class="validation-message"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+<!--                        <input type="text" th:field="*{cover}"
+                               placeholder="Cover" class="form-control"/> <label
+                            th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"
+                            class="validation-message"></label>-->
+                        <select th:field="*{cover}">
+                            <!--<option value="" th:disabled="disabled" th:selected="selected">
+                                -- Select the cover type --
+                            </option>-->
+                            <option value="" th:disabled="disabled" th:selected="selected"> -- Select the cover type -- </option>
+                            <option th:value="'S'" th:text="soft-cover"></option>
+                            <option th:value="'H'" th:text="hard-cover"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary btn-block">Add book</button>
+                    </div>
+                </div>
+
+<!--
+                <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+-->
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

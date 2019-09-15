@@ -11,10 +11,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <table class="table">
+        <div class="col-md-12">
+            <table class="table" >
                 <thead>
                 <tr>
+                    <th> Id </th>
                     <th> Title </th>
                     <th> Author </th>
                     <th> Year </th>
@@ -28,14 +29,13 @@
                     <td colspan="2"> No Books Available </td>
                 </tr>
                 <tr th:each="book : ${bookList}">
+                    <td ><span th:text="${book.id}"> Title </span></td>
                     <td><span th:text="${book.title}"> Title </span></td>
                     <td><span th:text="${book.author}"> Title </span></td>
                     <td><span th:text="${book.year}"> Year </span></td>
                     <td><span th:text="${book.category}"> Category </span></td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
-<!--
-                    <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
--->
+                    <td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i>Delete</a></td>
                 </tr>
                 <tr>
                     <select th:field="*{selectedAuthor}">
@@ -46,10 +46,7 @@
             </table>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success" href="#" th:href="@{/books/add}"> Add Books </a>
-<!--
-            <a class="btn btn-primary" href="#" th:href="@{/delete/{id}(id=${bookList.id})}" th:classappend="${bookList == null} ? 'disabled' : ''"> Delete Books </a>
--->
+            <a class="btn btn-success" href="#" th:href="@{/books/add}">Add Book</a>
         </div>
     </div>
 </div>

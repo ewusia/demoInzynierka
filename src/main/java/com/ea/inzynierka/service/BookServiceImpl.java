@@ -1,5 +1,6 @@
 package com.ea.inzynierka.service;
 
+import com.ea.inzynierka.exception.BookNotFound;
 import com.ea.inzynierka.model.Book;
 import com.ea.inzynierka.repo.BookRepository;
 import org.springframework.stereotype.Service;
@@ -22,50 +23,38 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> findAll() {
-		return null;
-	}
-
-	@Override
-	public Book findById(int id) {
-		return null;
-	}
-	
-	/*@Override
-	@Transactional
-	public Book findById(int id) {
-		return bookRepository.findOne(id);
-	}
-
-	@Override
 	@Transactional(rollbackFor=BookNotFound.class)
 	public Book delete(int id) throws BookNotFound {
-		Book deletedBook = bookRepository.findOne(id);
-		
+		Book deletedBook = bookRepository.findById(id);
+
 		if (deletedBook == null)
 			throw new BookNotFound();
-		
+
 		bookRepository.delete(deletedBook);
 		return deletedBook;
 	}
 
 	@Override
-	@Transactional
-	public List<Book> findAll() {
-		return bookRepository.findAll();
+	@Transactional(rollbackFor= BookNotFound.class)
+	public Book update(Book book) throws BookNotFound {
+		Book updatedBook = bookRepository.findById(book.getId());
+
+		if (updatedBook == null)
+			throw new BookNotFound();
+
+		updatedBook.setTitle(book.getTitle());
+		updatedBook.setAuthor(book.getAuthor());
+		return updatedBook;
 	}
 
 	@Override
-	@Transactional(rollbackFor=BookNotFound.class)
-	public Book update(Book book) throws BookNotFound {
-		Book updatedBook = bookRepository.findOne(book.getId());
-		
-		if (updatedBook == null)
-			throw new BookNotFound();
-		
-		updatedBook.setName(book.getName());
-		updatedBook.setEmplNumber(book.getEmplNumber());
-		return updatedBook;
-	}*/
+	public List<Book> findAll() {
+		return null;
+	}
+
+	@Override
+	public Book findById(int id) {
+		return null;
+	}
 
 }
