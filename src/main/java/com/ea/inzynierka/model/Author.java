@@ -1,25 +1,50 @@
-/*
-package com.gpch.login.model;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.ea.inzynierka.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "author")
 public class Author {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
     private int id;
-    @Column(name = "author")
-    private String author;
+
+    @Column(nullable = false)
+    @NotBlank(message = "author name field cannot be empty")
+    private String name;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
+
+
+    public Author() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 }
-*/
+

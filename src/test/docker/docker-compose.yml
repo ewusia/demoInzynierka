@@ -6,8 +6,8 @@ services:
     environment:
       MYSQL_DATABASE: 'new'
       MYSQL_USER: 'ewa'
-      MYSQL_PASSWORD: 'Staszica4m61!'
-      MYSQL_ROOT_PASSWORD: 'Staszica4m61!'
+      MYSQL_PASSWORD: 'Staszica4m61'
+      MYSQL_ROOT_PASSWORD: 'Staszica4m61'
     volumes:
       - type: bind
         source: "./resources/db/"

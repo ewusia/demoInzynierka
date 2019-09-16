@@ -1,20 +1,20 @@
 package com.ea.inzynierka.web;
 
 import com.ea.inzynierka.exception.BookNotFound;
-import com.ea.inzynierka.repo.BookRepository;
 import com.ea.inzynierka.model.Book;
+import com.ea.inzynierka.repo.BookRepository;
 import com.ea.inzynierka.service.BookService;
-import com.ea.inzynierka.web.exception.BookIdMismatchException;
-import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -56,17 +56,18 @@ public class BookController {
     public ModelAndView createNewBook(@ModelAttribute @Valid Book book,
                                       BindingResult result,
                                       final RedirectAttributes redirectAttributes) {
-
-        if (result.hasErrors())
+        if (result.hasErrors()) {
             return new ModelAndView("addBooksForm");
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
+        }
         bookService.create(book);
-        mav.setViewName("info");
+
+        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
+
         return mav;
     }
 
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteBook(@PathVariable Integer id,
                                    final RedirectAttributes redirectAttributes) throws BookNotFound {
 

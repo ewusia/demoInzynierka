@@ -1,24 +1,36 @@
 package com.ea.inzynierka.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 @Entity
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "book_id")
     private long id;
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = "title field cannot be empty")
     private String title;
 
-    @Column(nullable = false)
-    @NotBlank(message = "author field cannot be empty")
-    private String author;
+    @ManyToMany
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors;
 
     @Column(nullable = false)
     @NotBlank(message = "year field cannot be empty")
@@ -38,15 +50,13 @@ public class Book {
         super();
     }
 
-    public Book(String title, String author) {
+    public Book(String title) {
         super();
         this.title = title;
-        this.author = author;
     }
 
-    public Book(String title, String author, String year, String category, String cover) {
+    public Book(String title, String year, String category, String cover) {
         this.title = title;
-        this.author = author;
         this.year = year;
         this.category = category;
         this.cover = cover;
@@ -68,13 +78,6 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getYear() {
         return year;
@@ -104,7 +107,6 @@ public class Book {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((author == null) ? 0 : author.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
@@ -119,11 +121,6 @@ public class Book {
         if (getClass() != obj.getClass())
             return false;
         Book other = (Book) obj;
-        if (author == null) {
-            if (other.author != null)
-                return false;
-        } else if (!author.equals(other.author))
-            return false;
         if (id != other.id)
             return false;
         if (title == null) {
@@ -136,7 +133,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", category=" + category + ", cover=" + cover + "]";
+        return "Book [id=" + id + ", title=" + title + ", year=" + year + ", category=" + category + ", cover=" + cover + "]";
     }
 
 }
