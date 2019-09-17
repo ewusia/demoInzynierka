@@ -1,6 +1,8 @@
--- TRUNCATE TABLE new.book_author;
--- TRUNCATE TABLE new.book;
--- TRUNCATE TABLE new.author;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE new.book_author;
+TRUNCATE TABLE new.book;
+TRUNCATE TABLE new.author;
+SET FOREIGN_KEY_CHECKS = 1;
 
 
 INSERT INTO new.author (author_id, name) VALUES (-1, 'adam');
