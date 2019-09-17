@@ -6,6 +6,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 INSERT INTO new.author (author_id, name) VALUES (-1, 'adam');
+INSERT INTO new.author (author_id, name) VALUES (-2, 'ewa');
+INSERT INTO new.author (author_id, name) VALUES (-3, 'roman');
+
 
 INSERT INTO new.book (book_id, category, cover, title, year)
 VALUES (-1, 'IT', 'hard-cover', 'Java. Podstawy', '2019');
@@ -18,6 +21,10 @@ VALUES (-4, 'Health', 'soft-cover', 'Dieta Dąbrowskiej', '2018');
 
 
 INSERT  INTO new.book_author(book_id, author_id) VALUES (-1,-1);
+INSERT  INTO new.book_author(book_id, author_id) VALUES (-2,-1);
+INSERT  INTO new.book_author(book_id, author_id) VALUES (-2,-2);
+INSERT  INTO new.book_author(book_id, author_id) VALUES (-3,-1);
+INSERT  INTO new.book_author(book_id, author_id) VALUES (-4,-3);
 
 commit;
 

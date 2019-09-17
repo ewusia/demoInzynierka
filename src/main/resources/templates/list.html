@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>All Books</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container">
@@ -13,28 +13,36 @@
     <h2><span class="text-success" th:text=${successMessage}></span></h2>
     <div class="row">
         <div class="col-md-12">
-            <table class="table" >
+            <table class="table">
                 <thead>
                 <tr>
-                    <th> Title </th>
-                    <th> Author </th>
-                    <th> Year </th>
-                    <th> Category </th>
-                    <th> Cover </th>
-                    <th> Action book </th>
+                    <th> Title</th>
+                    <th> Author</th>
+                    <th> Year</th>
+                    <th> Category</th>
+                    <th> Cover</th>
+                    <th> Action book</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:if="${bookList == null}">
-                    <td colspan="2"> No Books Available </td>
+                    <td colspan="2"> No Books Available</td>
                 </tr>
                 <tr th:each="book : ${bookList}">
                     <td><span th:text="${book.title}"> Title </span></td>
-                    <td><span th:text="${book.author}"> Title </span></td>
+
+                    <td>
+                        <table>
+                            <tr th:each="author : ${book.authors}">
+                                <td><span th:text="${author.name}"> Name </span></td>
+                            </tr>
+                        </table>
+                    </td>
                     <td><span th:text="${book.year}"> Year </span></td>
                     <td><span th:text="${book.category}"> Category </span></td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
-                    <td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i>Delete</a></td>
+                    <td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-primary"><i
+                            class="fas fa-user-times ml-2"></i>Delete</a></td>
                 </tr>
                 </tbody>
             </table>
