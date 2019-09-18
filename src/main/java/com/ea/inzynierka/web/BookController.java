@@ -27,17 +27,6 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-
-/*    @GetMapping
-    public Iterable<Book> findAll() {
-        return bookRepository.findAll();
-    }
-
-    @GetMapping("/title/{bookTitle}")
-    public List<Book> findByTitle(@PathVariable String bookTitle) {
-        return bookRepository.findByTitle(bookTitle);
-    }*/
-
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView bookListPage() {
         ModelAndView mav = new ModelAndView("list");
@@ -48,7 +37,7 @@ public class BookController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView newBookPage() {
-        ModelAndView mav = new ModelAndView("addBooksForm", "book", new Book());
+        ModelAndView mav = new ModelAndView("addBookForm", "book", new Book());
         return mav;
     }
 
@@ -57,7 +46,7 @@ public class BookController {
                                       BindingResult result,
                                       final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return new ModelAndView("addBooksForm");
+            return new ModelAndView("addBookForm");
         }
         bookService.create(book);
 
@@ -71,10 +60,11 @@ public class BookController {
     public ModelAndView deleteBook(@PathVariable Integer id,
                                    final RedirectAttributes redirectAttributes) throws BookNotFound {
 
-        ModelAndView mav = new ModelAndView();
         Book book = bookService.delete(id);
-        mav.setViewName("info");
-        mav.addObject("successMessage", "Book '" + book.getTitle() + "' was successfully deleted.");
+
+        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' was successfully deleted.");
+
         return mav;
     }
 }

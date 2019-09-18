@@ -1,13 +1,11 @@
-/*
-package com.gpch.login.repo;
+package com.ea.inzynierka.repo;
 
-import com.gpch.login.model.Author;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.ea.inzynierka.model.Author;
+import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-@Repository("authorRepository")
-public interface AuthorRepository extends JpaRepository<Author, Integer> {
-    Author findByAuthor(String author);
+public interface AuthorRepository extends CrudRepository<Author, Long> {
+    List<Author> findByName(String name);
+    Author findById(int id);
 
 }
-*/
