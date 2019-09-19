@@ -10,6 +10,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class Book {
             name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @NotEmpty(message = "at least one author must be selected")
     private Set<Author> authors;
 
     @Column(nullable = false)
@@ -141,7 +143,13 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", year=" + year + ", category=" + category + ", cover=" + cover + "]";
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", authors=" + authors +
+                ", year='" + year + '\'' +
+                ", category='" + category + '\'' +
+                ", cover='" + cover + '\'' +
+                '}';
     }
-
 }

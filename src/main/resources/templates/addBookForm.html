@@ -27,11 +27,16 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{author}" placeholder="Author"
-                               class="form-control"/>
-                        <label
-                            th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
-                            class="validation-message"></label>
+
+                        <select th:field="*{authors}" multiple="multiple" class="form-control">
+                            <option th:each="author : ${authorList}"
+                                    th:selected="${book.authors}"
+                                    th:value="${author.id}"
+                                    th:text="${author.name}">
+                            </option>
+                        </select>
+                        <label th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"
+                               class="validation-message"></label>
                     </div>
                 </div>
 
@@ -47,7 +52,9 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <select th:field="*{category}">
-                            <option value="" th:disabled="disabled" th:selected="selected"> &#45;&#45; Select the category &#45;&#45; </option>
+                            <option value="" th:disabled="disabled" th:selected="selected"> &#45;&#45; Select the
+                                category &#45;&#45;
+                            </option>
                             <option th:value="'IT'" th:text="IT"></option>
                             <option th:value="'Health'" th:text="Health"></option>
                             <option th:value="'Beauty'" th:text="Beauty"></option>

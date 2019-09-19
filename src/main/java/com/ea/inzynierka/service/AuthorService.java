@@ -1,9 +1,14 @@
 package com.ea.inzynierka.service;
+
 import com.ea.inzynierka.exception.AuthorNotFound;
 import com.ea.inzynierka.model.Author;
+import java.util.List;
 
 public interface AuthorService {
-	
-	public Author create(Author author);
-	public Author delete(int id) throws AuthorNotFound;
+
+    Author create(Author author);
+
+    Author delete(long id) throws AuthorNotFound;
+
+    List<Author> findAll();
 }

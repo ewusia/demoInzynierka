@@ -7,7 +7,12 @@ SET FOREIGN_KEY_CHECKS = 1;
 INSERT INTO new.author (author_id, name) VALUES (-1, 'adam');
 INSERT INTO new.author (author_id, name) VALUES (-2, 'ewa');
 INSERT INTO new.author (author_id, name) VALUES (-3, 'roman');
-
+INSERT INTO new.author (author_id, name) VALUES (-4, 'basia');
+INSERT INTO new.author (author_id, name) VALUES (-5, 'kasia');
+INSERT INTO new.author (author_id, name) VALUES (-6, 'ania');
+INSERT INTO new.author (author_id, name) VALUES (-7, 'kacper');
+INSERT INTO new.author (author_id, name) VALUES (-8, 'kuba');
+INSERT INTO new.author (author_id, name) VALUES (-9, 'darek');
 
 INSERT INTO new.book (book_id, category, cover, title, year)
 VALUES (-1, 'IT', 'hard-cover', 'Java. Podstawy', '2019');

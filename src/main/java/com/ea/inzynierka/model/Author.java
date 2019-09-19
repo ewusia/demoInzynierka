@@ -10,7 +10,7 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     @NotBlank(message = "author name field cannot be empty")
@@ -23,7 +23,7 @@ public class Author {
     public Author() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

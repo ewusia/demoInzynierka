@@ -1,8 +1,9 @@
 package com.ea.inzynierka.web;
 
 import com.ea.inzynierka.exception.BookNotFound;
+import com.ea.inzynierka.model.Author;
 import com.ea.inzynierka.model.Book;
-import com.ea.inzynierka.repo.BookRepository;
+import com.ea.inzynierka.service.AuthorService;
 import com.ea.inzynierka.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -22,22 +23,24 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private BookRepository bookRepository;
+    private BookService bookService;
 
     @Autowired
-    private BookService bookService;
+    private AuthorService authorService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView bookListPage() {
         ModelAndView mav = new ModelAndView("list");
-        List<Book> bookList = (List<Book>) bookRepository.findAll();
+        List<Book> bookList = bookService.findAll();
         mav.addObject("bookList", bookList);
         return mav;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView newBookPage() {
+        List<Author> authors = authorService.findAll();
         ModelAndView mav = new ModelAndView("addBookForm", "book", new Book());
+        mav.addObject("authorList", authors);
         return mav;
     }
 
@@ -46,7 +49,10 @@ public class BookController {
                                       BindingResult result,
                                       final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return new ModelAndView("addBookForm");
+            List<Author> authors = authorService.findAll();
+            ModelAndView mav = new ModelAndView("addBookForm");
+            mav.addObject("authorList",authors);
+            return mav;
         }
         bookService.create(book);
 
