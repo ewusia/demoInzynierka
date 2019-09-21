@@ -30,7 +30,6 @@
                 </tr>
                 <tr th:each="book : ${bookList}">
                     <td><span th:text="${book.title}"> Title </span></td>
-
                     <td>
                         <table>
                             <tr th:each="author : ${book.authors}">
@@ -39,8 +38,13 @@
                         </table>
                     </td>
                     <td><span th:text="${book.year}"> Year </span></td>
-                    <td><span th:text="${book.category}"> Category </span></td>
-                    <td><span th:text="${book.cover}"> Cover </span></td>
+                    <td>
+                        <table>
+                            <tr th:each="category : ${book.category}">
+                                <td><span th:text="${category.name}"> Name </span></td>
+                            </tr>
+                        </table>
+                    </td>                    <td><span th:text="${book.cover}"> Cover </span></td>
                     <td><a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-primary"><i
                             class="fas fa-user-times ml-2"></i>Delete</a></td>
                 </tr>
@@ -51,6 +55,8 @@
             <a class="btn btn-success" href="#" th:href="@{/books/add}">Add Book</a>
             <a class="btn btn-success" href="#" th:href="@{/authors/addAuthor}">Add Author</a>
             <a class="btn btn-success" href="#" th:href="@{/authors/list}">Show Authors</a>
+            <a class="btn btn-success" href="#" th:href="@{/categories/addCategory}">Add Category</a>
+            <a class="btn btn-success" href="#" th:href="@{/categories/list}">Show Category</a>
         </div>
     </div>
 </div>

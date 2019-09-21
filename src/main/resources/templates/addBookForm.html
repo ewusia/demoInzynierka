@@ -27,7 +27,6 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-
                         <select th:field="*{authors}" multiple="multiple" class="form-control">
                             <option th:each="author : ${authorList}"
                                     th:selected="${book.authors}"
@@ -51,16 +50,15 @@
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <select th:field="*{category}">
-                            <option value="" th:disabled="disabled" th:selected="selected"> &#45;&#45; Select the
-                                category &#45;&#45;
+                        <select th:field="*{category}" class="form-control">
+                            <option th:each="category : ${categoryList}"
+                                    th:selected="${book.category}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name}">
                             </option>
-                            <option th:value="'IT'" th:text="IT"></option>
-                            <option th:value="'Health'" th:text="Health"></option>
-                            <option th:value="'Beauty'" th:text="Beauty"></option>
-                            <option th:value="'History'" th:text="History"></option>
-                            <option th:value="'Fantastic'" th:text="Fantastic"></option>
                         </select>
+                        <label th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                               class="validation-message"></label>
                     </div>
                 </div>
                 <div class="form-group">

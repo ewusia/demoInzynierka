@@ -1,13 +1,6 @@
 package com.ea.inzynierka.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -40,9 +33,10 @@ public class Book {
     @Min(1901)
     private String year;
 
-    @Column(nullable = false)
-    @NotBlank(message = "category field cannot be empty")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    @NotEmpty(message = "category field cannot be empty")
+    private Category category;
 
     @Column(nullable = false)
     @NotBlank(message = "cover field cannot be empty")
@@ -60,7 +54,6 @@ public class Book {
     public Book(String title, String year, String category, String cover) {
         this.title = title;
         this.year = year;
-        this.category = category;
         this.cover = cover;
     }
 
@@ -80,21 +73,12 @@ public class Book {
         this.title = title;
     }
 
-
     public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
         this.year = year;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getCover() {
@@ -111,6 +95,14 @@ public class Book {
 
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

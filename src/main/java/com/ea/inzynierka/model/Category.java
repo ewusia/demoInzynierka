@@ -5,21 +5,21 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-public class Author {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "author_id")
+    @Column(name = "category_id")
     private long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "author name field cannot be empty")
+    @NotBlank(message = "category name field cannot be empty")
     private String name;
 
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany(mappedBy = "category")
     private Set<Book> books;
 
-    public Author() {
+    public Category() {
     }
 
     public long getId() {

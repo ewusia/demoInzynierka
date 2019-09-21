@@ -3,8 +3,10 @@ package com.ea.inzynierka.web;
 import com.ea.inzynierka.exception.BookNotFound;
 import com.ea.inzynierka.model.Author;
 import com.ea.inzynierka.model.Book;
+import com.ea.inzynierka.model.Category;
 import com.ea.inzynierka.service.AuthorService;
 import com.ea.inzynierka.service.BookService;
+import com.ea.inzynierka.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +30,9 @@ public class BookController {
     @Autowired
     private AuthorService authorService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView bookListPage() {
         ModelAndView mav = new ModelAndView("list");
@@ -39,8 +44,10 @@ public class BookController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView newBookPage() {
         List<Author> authors = authorService.findAll();
+        List<Category> categories = categoryService.findAll();
         ModelAndView mav = new ModelAndView("addBookForm", "book", new Book());
         mav.addObject("authorList", authors);
+        mav.addObject("categoryList", categories);
         return mav;
     }
 
@@ -50,8 +57,10 @@ public class BookController {
                                       final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             List<Author> authors = authorService.findAll();
+            List<Category> categories = categoryService.findAll();
             ModelAndView mav = new ModelAndView("addBookForm");
-            mav.addObject("authorList",authors);
+            mav.addObject("authorList", authors);
+            mav.addObject("categoryList", categories);
             return mav;
         }
         bookService.create(book);
