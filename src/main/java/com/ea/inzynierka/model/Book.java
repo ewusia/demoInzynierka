@@ -51,7 +51,7 @@ public class Book {
         this.title = title;
     }
 
-    public Book(String title, String year, String category, String cover) {
+    public Book(String title, String year, String cover) {
         this.title = title;
         this.year = year;
         this.cover = cover;
