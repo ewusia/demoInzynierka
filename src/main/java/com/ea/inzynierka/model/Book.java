@@ -1,9 +1,18 @@
 package com.ea.inzynierka.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
 
@@ -35,7 +44,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    @NotEmpty(message = "category field cannot be empty")
+    @NotNull
     private Category category;
 
     @Column(nullable = false)
@@ -126,11 +135,8 @@ public class Book {
         if (id != other.id)
             return false;
         if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        return true;
+            return other.title == null;
+        } else return title.equals(other.title);
     }
 
     @Override

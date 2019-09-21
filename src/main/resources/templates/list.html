@@ -11,6 +11,13 @@
         </div>
     </div>
     <h2><span class="text-success" th:text=${successMessage}></span></h2>
+    <div class="col-md-9">
+        <a class="btn btn-success" href="#" th:href="@{/books/add}">Add Book</a>
+        <a class="btn btn-success" href="#" th:href="@{/authors/addAuthor}">Add Author</a>
+        <a class="btn btn-success" href="#" th:href="@{/authors/list}">Show Authors</a>
+        <a class="btn btn-success" href="#" th:href="@{/categories/addCategory}">Add Category</a>
+        <a class="btn btn-success" href="#" th:href="@{/categories/list}">Show Category</a>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table">
@@ -50,13 +57,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-6">
-            <a class="btn btn-success" href="#" th:href="@{/books/add}">Add Book</a>
-            <a class="btn btn-success" href="#" th:href="@{/authors/addAuthor}">Add Author</a>
-            <a class="btn btn-success" href="#" th:href="@{/authors/list}">Show Authors</a>
-            <a class="btn btn-success" href="#" th:href="@{/categories/addCategory}">Add Category</a>
-            <a class="btn btn-success" href="#" th:href="@{/categories/list}">Show Category</a>
         </div>
     </div>
 </div>

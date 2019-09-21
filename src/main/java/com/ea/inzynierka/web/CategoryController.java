@@ -2,11 +2,14 @@ package com.ea.inzynierka.web;
 
 import com.ea.inzynierka.exception.CategoryNotFound;
 import com.ea.inzynierka.model.Category;
-import com.ea.inzynierka.repo.CategoryRepository;
 import com.ea.inzynierka.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,8 +20,6 @@ import java.util.List;
 @RequestMapping("/categories")
 public class CategoryController {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @Autowired
     private CategoryService categoryService;
@@ -26,7 +27,7 @@ public class CategoryController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView categoryListPage() {
         ModelAndView mav = new ModelAndView("categoriesList");
-        List<Category> categoryList = (List<Category>) categoryRepository.findAll();
+        List<Category> categoryList = categoryService.findAll();
         mav.addObject("categoryList", categoryList);
         return mav;
     }
@@ -39,8 +40,8 @@ public class CategoryController {
 
     @RequestMapping(value = "/addCategory", method = RequestMethod.POST)
     public ModelAndView createNewCategory(@ModelAttribute @Valid Category category,
-                                      BindingResult result,
-                                      final RedirectAttributes redirectAttributes) {
+                                          BindingResult result,
+                                          final RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("addCategoryForm");
         }
@@ -54,7 +55,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/deleteCategory/{id}", method = RequestMethod.GET)
     public ModelAndView deleteCategory(@PathVariable Integer id,
-                                   final RedirectAttributes redirectAttributes) throws CategoryNotFound {
+                                       final RedirectAttributes redirectAttributes) throws CategoryNotFound {
 
         ModelAndView mav = new ModelAndView();
         Category category = categoryService.delete(id);

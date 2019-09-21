@@ -51,6 +51,7 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <select th:field="*{category}" class="form-control">
+                            <option value=""> --</option>
                             <option th:each="category : ${categoryList}"
                                     th:selected="${book.category}"
                                     th:value="${category.id}"
