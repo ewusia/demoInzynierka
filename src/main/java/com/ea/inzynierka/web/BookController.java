@@ -4,9 +4,11 @@ import com.ea.inzynierka.exception.BookNotFound;
 import com.ea.inzynierka.model.Author;
 import com.ea.inzynierka.model.Book;
 import com.ea.inzynierka.model.Category;
+import com.ea.inzynierka.repo.BookRepository;
 import com.ea.inzynierka.service.AuthorService;
 import com.ea.inzynierka.service.BookService;
 import com.ea.inzynierka.service.CategoryService;
+import com.ea.inzynierka.web.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -26,6 +29,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
     private AuthorService authorService;
@@ -68,6 +74,37 @@ public class BookController {
         ModelAndView mav = new ModelAndView("redirect:/books/list");
         redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
 
+        return mav;
+    }
+    
+    @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
+    public ModelAndView editBookPage(@PathVariable long id) {
+        List<Author> authors = authorService.findAll();
+        List<Category> categories = categoryService.findAll();
+
+        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        ModelAndView mav = new ModelAndView("editBook", "book", new Book());
+        mav.addObject("authorList", authors);
+        mav.addObject("categoryList", categories);
+        mav.addObject("book", book);
+        return mav;
+    }
+
+    @RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
+    public ModelAndView editBook(@ModelAttribute @Valid Book book,
+                                 BindingResult result,
+                                 @PathVariable Integer id,
+                                 final RedirectAttributes redirectAttributes) throws BookNotFound {
+
+        if (result.hasErrors())
+            return new ModelAndView("editBook");
+
+        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        String message = "Book was successfully updated.";
+
+        bookService.edit(book);
+
+        redirectAttributes.addFlashAttribute("message", message);
         return mav;
     }
 
