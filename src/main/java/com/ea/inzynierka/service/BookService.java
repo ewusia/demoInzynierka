@@ -11,4 +11,5 @@ public interface BookService {
     Book edit(Book book) throws BookNotFound;
     Book delete(long id) throws BookNotFound;
     List<Book> findAll();
+
 }
