@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -88,24 +89,28 @@ public class BookController {
         return mav;
     }
 
-    @RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
-    public ModelAndView editBook(@ModelAttribute @Valid Book book,
+    @RequestMapping(value="/update/{id}", method=RequestMethod.POST)
+    public ModelAndView editBook(@ModelAttribute @Valid Book bookDetails,
                                  BindingResult result,
-                                 @PathVariable Integer id,
+                                 @PathVariable long id,
                                  final RedirectAttributes redirectAttributes) throws BookNotFound {
 
-        if (result.hasErrors())
-            return new ModelAndView("editBook");
+        Book book = bookRepository.findById(bookDetails.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
-        String message = "Book was successfully updated.";
-
+        if (result.hasErrors()) {
+            List<Author> authors = authorService.findAll();
+            List<Category> categories = categoryService.findAll();
+            ModelAndView mav = new ModelAndView("editBook");
+            mav.addObject("authorList", authors);
+            mav.addObject("categoryList", categories);
+            return mav;
+        }
         bookService.edit(book);
 
-        redirectAttributes.addFlashAttribute("message", message);
+        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' has been updated successfully.");
+
         return mav;
-
-
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

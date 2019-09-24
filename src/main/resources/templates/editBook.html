@@ -11,8 +11,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form action="#" th:action="@{/books/edit/{id}(id=${book.id})}"
-                  th:object="${book}" method="put" class="form-horizontal" role="form">
+            <form action="#" th:action="@{/books/update/{id}(id=${book.id})}"
+                  th:object="${book}" method="post" class="form-horizontal">
                 <h2>Edit book</h2>
 
                 <div class="form-group">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <button type="submit" class="btn btn-primary btn-block">Edit book</button>
+                        <input type="submit" class="btn btn-primary" value="Update Book">
                     </div>
                 </div>
             </form>

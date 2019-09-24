@@ -27,15 +27,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(rollbackFor=BookNotFound.class)
-    public Book edit(Book book) throws BookNotFound {
-        Optional<Book> bookOptional = bookRepository.findById(book.getId());
-        book = bookOptional.orElseThrow(BookNotFound::new);
+    public Book edit(Book bookDetails) throws BookNotFound {
+        Optional<Book> book = bookRepository.findById(bookDetails.getId());
+        Book updatedBook = book.orElseThrow(BookNotFound::new);
 
-   /*     if (updatedBook == null)
-            throw new BookNotFound();*/
+        updatedBook.setTitle(bookDetails.getTitle());
+        updatedBook.setAuthors(bookDetails.getAuthors());
+        updatedBook.setYear(bookDetails.getYear());
+        updatedBook.setCategory(bookDetails.getCategory());
+        updatedBook.setCover(bookDetails.getCover());
 
-        bookRepository.save(book);
-        return book;
+        updatedBook = bookRepository.save(updatedBook);
+        return updatedBook;
     }
 
     @Override
