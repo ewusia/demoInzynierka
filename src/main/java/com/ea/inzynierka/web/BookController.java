@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -95,8 +94,6 @@ public class BookController {
                                  @PathVariable long id,
                                  final RedirectAttributes redirectAttributes) throws BookNotFound {
 
-        Book book = bookRepository.findById(bookDetails.getId()).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
-
         if (result.hasErrors()) {
             List<Author> authors = authorService.findAll();
             List<Category> categories = categoryService.findAll();
@@ -105,10 +102,10 @@ public class BookController {
             mav.addObject("categoryList", categories);
             return mav;
         }
-        bookService.edit(book);
+        bookService.edit(bookDetails);
 
         ModelAndView mav = new ModelAndView("redirect:/books/list");
-        redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' has been updated successfully.");
+        redirectAttributes.addFlashAttribute("successMessage", "Book '" + bookDetails.getTitle() + "' has been updated successfully.");
 
         return mav;
     }
