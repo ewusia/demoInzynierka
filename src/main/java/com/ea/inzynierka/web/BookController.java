@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+//@RequestMapping("/books")
 public class BookController {
 
     @Autowired
@@ -37,9 +37,9 @@ public class BookController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView bookListPage() {
-        ModelAndView mav = new ModelAndView("list");
+        ModelAndView mav = new ModelAndView("index");
         List<Book> bookList = bookService.findAll();
         mav.addObject("bookList", bookList);
         return mav;
@@ -69,7 +69,7 @@ public class BookController {
         }
         bookService.create(book);
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        ModelAndView mav = new ModelAndView("redirect:/");
         redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' has been added successfully.");
 
         return mav;
@@ -104,7 +104,7 @@ public class BookController {
         }
         bookService.edit(bookDetails);
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        ModelAndView mav = new ModelAndView("redirect:/");
         redirectAttributes.addFlashAttribute("successMessage", "Book '" + bookDetails.getTitle() + "' has been updated successfully.");
 
         return mav;
@@ -116,7 +116,7 @@ public class BookController {
 
         Book book = bookService.delete(id);
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        ModelAndView mav = new ModelAndView("redirect:/");
         redirectAttributes.addFlashAttribute("successMessage", "Book '" + book.getTitle() + "' was successfully deleted.");
 
         return mav;

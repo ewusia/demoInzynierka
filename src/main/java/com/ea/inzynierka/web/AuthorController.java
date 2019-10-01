@@ -46,7 +46,7 @@ public class AuthorController {
         }
         authorService.create(author);
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        ModelAndView mav = new ModelAndView("redirect:/");
         redirectAttributes.addFlashAttribute("successMessage", "Author '" + author.getName() + "' has been added successfully.");
 
         return mav;

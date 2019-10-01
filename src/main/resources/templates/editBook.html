@@ -5,13 +5,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
-<form th:action="@{/books/list}" method="get">
+<form th:action="@{/}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Books List</button>
 </form>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form action="#" th:action="@{/books/update/{id}(id=${book.id})}"
+            <form action="#" th:action="@{/update/{id}(id=${book.id})}"
                   th:object="${book}" method="post" class="form-horizontal">
                 <h2>Edit book</h2>
 

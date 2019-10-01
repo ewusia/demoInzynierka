@@ -47,7 +47,7 @@ public class CategoryController {
         }
         categoryService.create(category);
 
-        ModelAndView mav = new ModelAndView("redirect:/books/list");
+        ModelAndView mav = new ModelAndView("redirect:/");
         redirectAttributes.addFlashAttribute("successMessage", "Category '" + category.getName() + "' has been added successfully.");
 
         return mav;
