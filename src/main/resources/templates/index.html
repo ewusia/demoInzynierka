@@ -71,7 +71,7 @@
                 $("#user").html('');
                 $(".unauthenticated").show();
                 $(".authenticated").hide();
-            })
+            });
             return true;
         }
     </script>
@@ -110,10 +110,14 @@
                         </table>
                     </td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
-                    <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-primary">
-                        <i class="fas fa-user-times ml-2"></i>Delete</a></td>
-                    <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">
-                        <i class="fas fa-user-times ml-2"></i>Edit</a></td>
+                    <td>
+                        <div class="authenticated"><a class="btn btn-primary" th:href="@{/delete/{id}(id=${book.id})}">
+                            <i class="fas fa-user-times ml-2"></i>Delete</a></div>
+                    </td>
+                    <td>
+                        <div class="authenticated"><a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">
+                            <i class="fas fa-user-times ml-2"></i>Edit</a></div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
