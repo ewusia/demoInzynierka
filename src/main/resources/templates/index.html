@@ -2,14 +2,14 @@
 <head>
     <title>All Books</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Demo</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width" />
-    <base href="/" />
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
     <link rel="stylesheet" type="text/css"
-          href="/webjars/bootstrap/css/bootstrap.min.css" />
+          href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript"
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -22,31 +22,30 @@
         </div>
     </div>
     <h2><span class="text-success" th:text=${successMessage}></span></h2>
-    <div class="col-md-9">
-        <a class="btn btn-success" href="#" th:href="@{/add}">Add Book</a>
-        <a class="btn btn-success" href="#" th:href="@{/authors/addAuthor}">Add Author</a>
-        <a class="btn btn-success" href="#" th:href="@{/authors/list}">Show Authors</a>
-        <a class="btn btn-success" href="#" th:href="@{/categories/addCategory}">Add Category</a>
-        <a class="btn btn-success" href="#" th:href="@{/categories/list}">Show Category</a>
-    </div>
     <div class="container unauthenticated">
-        <div>
-            With Facebook: <a href="/login/facebook">click here</a>
-        </div>
-        <div>
-            With Github: <a href="/login/github">click here</a>
+        <div class="col-md-9">
+            <a class="btn btn-success" style="background-color: #BA55D3;" href="/login/github">Login with GitHub</a>
+            <a class="btn btn-success" style="background-color: #BA55D3;" href="/login/facebook">Login with Facebook</a>
         </div>
     </div>
     <div class="container authenticated" style="display: none">
-        Logged in as: <span id="user"></span>
         <div>
-            <button onClick="logout()" class="btn btn-primary">Logout</button>
+            <h3>Logged in as: <span id="user"></span></span></h3>
+            <button onClick="logout()" class="btn btn-primary" style="float: right; background-color: #BA55D3;">Logout
+            </button>
+        </div>
+        <div class="col-md-9">
+            <a class="btn btn-success" href="#" th:href="@{/add}">Add Book</a>
+            <a class="btn btn-success" href="#" th:href="@{/authors/addAuthor}">Add Author</a>
+            <a class="btn btn-success" href="#" th:href="@{/authors/list}">Show Authors</a>
+            <a class="btn btn-success" href="#" th:href="@{/categories/addCategory}">Add Category</a>
+            <a class="btn btn-success" href="#" th:href="@{/categories/list}">Show Category</a>
         </div>
     </div>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
     <script type="text/javascript">
         $.ajaxSetup({
-            beforeSend : function(xhr, settings) {
+            beforeSend: function (xhr, settings) {
                 if (settings.type == 'POST' || settings.type == 'PUT'
                     || settings.type == 'DELETE') {
                     if (!(/^http:.*/.test(settings.url) || /^https:.*/
@@ -58,17 +57,17 @@
                 }
             }
         });
-        $.get("/user", function(data) {
+        $.get("/user", function (data) {
             $("#user").html(data.name);
             if (data.name == undefined) {
                 logout();
-            }else{
+            } else {
                 $(".unauthenticated").hide();
                 $(".authenticated").show();
             }
         });
-        var logout = function() {
-            $.post("/logout", function() {
+        var logout = function () {
+            $.post("/logout", function () {
                 $("#user").html('');
                 $(".unauthenticated").show();
                 $(".authenticated").hide();
@@ -111,10 +110,10 @@
                         </table>
                     </td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
-                    <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-primary"><i
-                            class="fas fa-user-times ml-2"></i>Delete</a></td>
-                    <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary"><i
-                            class="fas fa-user-times ml-2"></i>Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-primary">
+                        <i class="fas fa-user-times ml-2"></i>Delete</a></td>
+                    <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">
+                        <i class="fas fa-user-times ml-2"></i>Edit</a></td>
                 </tr>
                 </tbody>
             </table>
