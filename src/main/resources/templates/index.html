@@ -24,14 +24,14 @@
     <h2><span class="text-success" th:text=${successMessage}></span></h2>
     <div class="container unauthenticated">
         <div class="col-md-9">
-            <a class="btn btn-success" style="background-color: #BA55D3;" href="/login/github">Login with GitHub</a>
-            <a class="btn btn-success" style="background-color: #BA55D3;" href="/login/facebook">Login with Facebook</a>
+            <a class="btn btn-success" style="background-color: #FF8C00;" href="/login/github">Login with GitHub</a>
+            <a class="btn btn-success" style="background-color: #FF8C00;" href="/login/facebook">Login with Facebook</a>
         </div>
     </div>
     <div class="container authenticated" style="display: none">
         <div>
             <h3>Logged in as: <span id="user"></span></span></h3>
-            <button onClick="logout()" class="btn btn-primary" style="float: right; background-color: #BA55D3;">Logout
+            <button onClick="logout()" class="btn btn-primary" style="float: right; background-color: #FF8C00;">Logout
             </button>
         </div>
         <div class="col-md-9">
@@ -111,7 +111,7 @@
                     </td>
                     <td><span th:text="${book.cover}"> Cover </span></td>
                     <td>
-                        <div class="authenticated"><a class="btn btn-primary" th:href="@{/delete/{id}(id=${book.id})}">
+                        <div class="authenticated"><a class="btn btn-primary" style="background-color: #f44336"; th:href="@{/delete/{id}(id=${book.id})}">
                             <i class="fas fa-user-times ml-2"></i>Delete</a></div>
                     </td>
                     <td>
