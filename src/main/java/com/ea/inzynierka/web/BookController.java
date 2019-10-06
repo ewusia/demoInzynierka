@@ -79,7 +79,7 @@ public class BookController {
         List<Author> authors = authorService.findAll();
         List<Category> categories = categoryService.findAll();
 
-        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        Book book = bookService.findById(id);
         ModelAndView mav = new ModelAndView("editBook", "book", new Book());
         mav.addObject("authorList", authors);
         mav.addObject("categoryList", categories);

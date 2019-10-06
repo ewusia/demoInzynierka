@@ -60,4 +60,10 @@ public class BookServiceImpl implements BookService {
         return result;
     }
 
+    @Override
+    public Book findById(long id) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+        return book;
+    }
+
 }
