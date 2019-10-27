@@ -41,7 +41,6 @@ import org.springframework.web.filter.CompositeFilter;
 @RestController
 @EnableOAuth2Client
 @EnableAuthorizationServer
-@Order(6)
 public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -95,16 +94,9 @@ public class Application extends WebSecurityConfigurerAdapter {
 		return new ClientResources();
 	}
 
-	@Bean
-	@ConfigurationProperties("facebook")
-	public ClientResources facebook() {
-		return new ClientResources();
-	}
-
 	private Filter ssoFilter() {
 		CompositeFilter filter = new CompositeFilter();
 		List<Filter> filters = new ArrayList<>();
-		filters.add(ssoFilter(facebook(), "/login/facebook"));
 		filters.add(ssoFilter(github(), "/login/github"));
 		filter.setFilters(filters);
 		return filter;
