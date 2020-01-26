@@ -29,9 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(rollbackFor = CategoryNotFound.class)
     public Category delete(long id) throws CategoryNotFound {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
-
         Category category = categoryOptional.orElseThrow(CategoryNotFound::new);
-
         categoryRepository.delete(category);
         return category;
     }
@@ -42,6 +40,21 @@ public class CategoryServiceImpl implements CategoryService {
         Iterable<Category> all = categoryRepository.findAll();
         all.forEach(result::add);
         return result;
+    }
+
+    @Override
+    public Optional<Category> findById(long id) {
+        return categoryRepository.findById(id);
+    }
+
+    @Override
+    public long count() {
+        return categoryRepository.count();
+    }
+
+    @Override
+    public void save(Category category) {
+        categoryRepository.save(category);
     }
 
 }

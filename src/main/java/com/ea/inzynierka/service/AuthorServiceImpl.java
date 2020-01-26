@@ -29,9 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional(rollbackFor = AuthorNotFound.class)
     public Author delete(long id) throws AuthorNotFound {
         Optional<Author> authorOptional = authorRepository.findById(id);
-
         Author author = authorOptional.orElseThrow(AuthorNotFound::new);
-
         authorRepository.delete(author);
         return author;
     }
@@ -42,6 +40,21 @@ public class AuthorServiceImpl implements AuthorService {
         Iterable<Author> all = authorRepository.findAll();
         all.forEach(result::add);
         return result;
+    }
+
+    @Override
+    public Optional<Author> findById(long id) {
+        return authorRepository.findById(id);
+    }
+
+    @Override
+    public Long count() {
+        return authorRepository.count();
+    }
+
+    @Override
+    public void save(Author author) {
+        authorRepository.save(author);
     }
 
 }
