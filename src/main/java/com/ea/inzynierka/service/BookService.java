@@ -11,5 +11,6 @@ public interface BookService {
     Book delete(long id) throws BookNotFound;
     List<Book> findAll();
     Book findById(long id);
-
+    void save(Book book);
+    long count();
 }

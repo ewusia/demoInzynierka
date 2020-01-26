@@ -66,4 +66,14 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
+    @Override
+    public void save(Book book) {
+        bookRepository.save(book);
+    }
+
+    @Override
+    public long count() {
+        return bookRepository.count();
+    }
+
 }

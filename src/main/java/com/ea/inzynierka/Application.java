@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
@@ -44,6 +45,7 @@ import org.springframework.web.filter.CompositeFilter;
 public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
+	@Qualifier("oauth2ClientContext")
 	OAuth2ClientContext oauth2ClientContext;
 
 	@RequestMapping({ "/user", "/me" })
@@ -52,17 +54,15 @@ public class Application extends WebSecurityConfigurerAdapter {
 		map.put("name", principal.getName());
 		return map;
 	}
-
+// Metoda odpowiada za skonfigurowanie widoku startowego
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
-		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**", "/error**").permitAll().anyRequest()
+		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**", "/error**").permitAll().anyRequest() // http: HttpSecurity
 				.authenticated().and().exceptionHandling()
 				.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/")).and().logout()
-				.logoutSuccessUrl("/").permitAll().and().csrf()
+				.logoutSuccessUrl("/").permitAll().and().csrf() // Cross-site request forgery – metoda ataku na serwis internetowy. Ochrona jest domyślnie włączona w konfiguracji Java.
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
 				.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-		// @formatter:on
 	}
 
 	@Configuration
@@ -70,9 +70,7 @@ public class Application extends WebSecurityConfigurerAdapter {
 	protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
-			// @formatter:off
 			http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
-			// @formatter:on
 		}
 	}
 
